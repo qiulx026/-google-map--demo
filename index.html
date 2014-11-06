@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<script src="drawmap.js">  </script>
+<script src="data.js">  </script>
+<script src="sort.js">  </script>
+<script type="text/javascript" src="spryMap-2.js"></script> 
+						
+
+ <script type="text/javascript"> 
+  window.onload = function() {
+  var map = new SpryMap({id : "worldMap"});
+  } </script> 
+</head>
+
+<body>
+<canvas id="worldMap" width="4000" height="4000">
+</canvas>
+<canvas id="buffer" style="display:none;"></canvas>
+
+<script>
+/*var lonmax=data[0].lon
+	lonmin=data[0].lon
+	latmax=data[0].lat
+	latmin=data[0].lat
+*/
+var flag=0;
+getdata("123");
+function getdata(d){
+	var data;
+	if(d=="123") data=data1;
+	else data=data2;
+	for(var i=0; i < data.length ; i++){
+		
+		/*if(data[i].lon>lonmax)
+			lonmax=data[i].lon;
+		if(data[i].lon<lonmin)
+			lonmin=data[i].lon;
+		if(data[i].lat>latmax)
+			latmax=data[i].lat;
+		if(data[i].lat<latmin)
+			latmin=data[i].lat;*/
+		var temp=[];
+		var index=0;
+		/*for(var j=0;j<data[i].partner.length/2;j++){
+			
+			if((data[i].lon!=data[i].partner[2*j]) || (data[i].lat!=data[i].partner[2*j+1])){
+				temp[index]=data[i].partner[2*j];
+				temp[index+1]=data[i].partner[2*j+1];
+				index=index+2;
+			}
+		}
+		data[i].partner=temp;*/
+		switch(data[i].partner.length/2){
+			case 1: drawIntersection_1(data[i]);
+					break;
+			case 2: drawIntersection_2(data[i]);
+					break;
+			case 3: drawIntersection_3(data[i]);
+					break;
+			case 4: drawIntersection_4(data[i]);
+					break;
+			case 5: drawIntersection_5(data[i]);
+					break;
+			case 6: drawIntersection_6(data[i]);
+					break;
+			default: console.log(data[i].partner.length/2) 
+					break;
+		}
+	}
+}
+</script>
+
+</body>
+
+</html>
